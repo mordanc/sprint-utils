@@ -7,6 +7,7 @@ import {
   selectId,
   removeAllCards
 } from "../../features/tracks/trackSlice";
+import { cardTypes } from "../constants";
 
 export default function CardCreator(props) {
   const { type = "good", setShowModal } = props;
@@ -22,6 +23,8 @@ export default function CardCreator(props) {
   });
 
   const add = () => {
+    setText("");
+    setShowModal(false);
     dispatch(incrementId());
     dispatch(
       addCard({
@@ -45,7 +48,13 @@ export default function CardCreator(props) {
           x
         </p>
         <div className={"px-6 py-4"}>
-          <h1 className={"text-gray-400"}>Add a {type} card</h1>
+          <h1 className={"text-gray-900"}>
+            {type === cardTypes.GOOD
+              ? "Add something that went well"
+              : type === cardTypes.BAD
+              ? "Add something that could be improved on"
+              : "Add an action item"}
+          </h1>
           <form onSubmit={e => e.preventDefault()}>
             <input
               className={"rounded my-2 pl-1 focus:border-blue-400"}
@@ -60,28 +69,28 @@ export default function CardCreator(props) {
               <button
                 onClick={() => add()}
                 className={
-                  "box-border w-1/3 hover:bg-gray-900 hover:text-white rounded p-1 "
+                  "border border-solid border-green-900 w-1/2 hover:bg-gray-900 hover:text-white rounded p-1 "
                 }
               >
-                Create
+                Create (Enter)
               </button>
 
               <button
                 onClick={() => setText("")}
                 className={
-                  "box-border w-1/3 hover:bg-gray-900 hover:text-white rounded p-1 ml-2 "
+                  "border border-solid border-gray-700 w-1/2 hover:bg-gray-900 hover:text-white rounded p-1 ml-2 "
                 }
               >
                 Clear Text
               </button>
-              <button
+              {/* <button
                 onClick={() => dispatch(removeAllCards())}
                 className={
                   "border border-red-900 w-1/3 hover:bg-red-900 hover:text-white rounded p-1 ml-2"
                 }
               >
                 Clear All
-              </button>
+              </button> */}
             </div>
           </form>
         </div>
