@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import Track from "./Track";
-import Card from "../../common/components/Card";
 import {
   selectGoodCards,
   selectBadCards,
@@ -17,9 +16,6 @@ export default function TrackList() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 ">
-      {/* <div className={"w-1/5"}></div> */}
-      {/* <div></div> */}
-
       <Track
         className={"bg-gray-400"}
         title={"What went well"}

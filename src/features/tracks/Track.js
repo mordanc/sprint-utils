@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import CardCreator from "../../common/components/CardCreator";
-
-import { addCard } from "./trackSlice";
-import styles from "./Track.module.css";
 
 import { fadeTransition } from "../../common/constants";
 
@@ -18,7 +14,12 @@ export default function Track(props) {
 
   const displayCards = cards.map((card, key) => (
     <CSSTransition key={key} timeout={350} classNames={fadeTransition}>
-      <Card id={card.id} text={card.text} author={card.author} />
+      <Card
+        id={card.id}
+        text={card.text}
+        author={card.author}
+        type={card.type}
+      />
     </CSSTransition>
   ));
 

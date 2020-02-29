@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { addCard } from "../../features/tracks/trackSlice";
+import {
+  addCard,
+  incrementId,
+  selectId
+} from "../../features/tracks/trackSlice";
 
 export default function CardCreator(props) {
   const { type = "good", setShowModal } = props;
   const [text, setText] = useState("");
 
   const dispatch = useDispatch();
+  const curId = useSelector(selectId);
 
   const ref = useRef();
 
@@ -16,14 +21,15 @@ export default function CardCreator(props) {
   });
 
   const add = () => {
+    dispatch(incrementId());
     dispatch(
       addCard({
         card: {
-          id: 1,
-          text: "lorem dlkafjldsjfkl djsafklj dslkfjdsklf jsdklfj djf",
-          author: "author"
-        },
-        type: type
+          id: curId,
+          text,
+          author: "author",
+          type: type
+        }
       })
     );
   };

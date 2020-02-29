@@ -7,12 +7,13 @@ export const slice = createSlice({
   initialState: {
     goodCards: [],
     badCards: [],
-    actionCards: []
+    actionCards: [],
+    currentId: 0
   },
   reducers: {
     addCard: (state, action) => {
       const card = action.payload.card;
-      const type = action.payload.type;
+      const type = action.payload.card.type;
 
       switch (type) {
         case cardTypes.GOOD:
@@ -27,8 +28,25 @@ export const slice = createSlice({
     },
     removeCard: (state, action) => {
       const id = action.payload.id;
-      const newCards = state.cards.filter(card => card.id !== id);
-      return { ...state, cards: newCards };
+      const type = action.payload.type;
+      let newCards;
+
+      switch (type) {
+        case cardTypes.GOOD:
+          newCards = state.goodCards.filter(card => card.id !== id);
+          return { ...state, goodCards: newCards };
+        case cardTypes.BAD:
+          newCards = state.badCards.filter(card => card.id !== id);
+          return { ...state, badCards: newCards };
+        case cardTypes.ACTION:
+          newCards = state.actionCards.filter(card => card.id !== id);
+          return { ...state, actionCards: newCards };
+        default:
+          return state;
+      }
+    },
+    incrementId: state => {
+      return { ...state, currentId: state.currentId + 1 };
     }
   }
 });
@@ -36,6 +54,8 @@ export const slice = createSlice({
 export const selectGoodCards = state => state.tracks.goodCards;
 export const selectBadCards = state => state.tracks.badCards;
 export const selectActionCards = state => state.tracks.actionCards;
-export const { addCard, removeCard } = slice.actions;
+export const selectId = state => state.tracks.currentId;
+
+export const { addCard, removeCard, incrementId } = slice.actions;
 
 export default slice.reducer;
