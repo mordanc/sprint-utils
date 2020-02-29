@@ -1,0 +1,12 @@
+.modal {
+  position: absolute;
+  top: 30%;
+  right: 50%;
+  z-index: 1;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: inherit;
+}

@@ -1,47 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import CardCreator from "../../common/components/CardCreator";
 
 import { addCard } from "./trackSlice";
+import styles from "./Track.module.css";
 
+import { fadeTransition } from "../../common/constants";
+
+import Modal from "../../common/components/Modal";
 import Card from "../../common/components/Card";
 
 export default function Track(props) {
   const { cards, title, type } = props;
 
-  const displayCards = cards.map(card => (
-    <Card id={card.id} text={card.text} author={card.author} />
+  const [showModal, setShowModal] = useState(false);
+
+  const displayCards = cards.map((card, key) => (
+    <CSSTransition key={key} timeout={350} classNames={fadeTransition}>
+      <Card id={card.id} text={card.text} author={card.author} />
+    </CSSTransition>
   ));
 
-  const dispatch = useDispatch();
-
   return (
-    <div>
+    <div className={" "}>
+      <Modal
+        Component={CardCreator}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        type={type}
+      />
       <div
         className={
-          "text-black text-center text-xl hover:shadow-lg bg-gray-700 rounded mr-5 ml-5 mt-5 px-2"
+          "text-black text-center text-xl hover:shadow-lg bg-gray-700 rounded m-5 px-2"
         }
       >
         <h1>{title}</h1>
         <p
-          className={"text-green-600 cursor-pointer box-border border-blue-100"}
-          onClick={e => {
-            console.log("dispatch");
-            dispatch(
-              addCard({
-                card: {
-                  id: 1,
-                  text: "lorem dlkafjldsjfkl djsafklj dslkfjdsklf jsdklfj djf",
-                  author: "author"
-                },
-                type: type
-              })
-            );
-          }}
+          className={"text-green-600 cursor-pointer "}
+          onClick={() => setShowModal(!showModal)}
         >
           +
         </p>
       </div>
-      {displayCards}
+      <div className={"grid grid-cols-1"}>
+        <TransitionGroup className={"hey"}>{displayCards}</TransitionGroup>
+      </div>
     </div>
   );
 }
