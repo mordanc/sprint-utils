@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addCard,
   incrementId,
-  selectId
+  selectId,
+  removeAllCards
 } from "../../features/tracks/trackSlice";
 
 export default function CardCreator(props) {
@@ -45,22 +46,44 @@ export default function CardCreator(props) {
         </p>
         <div className={"px-6 py-4"}>
           <h1 className={"text-gray-400"}>Add a {type} card</h1>
-          <input
-            className={"rounded my-2 pl-1 focus:border-blue-400"}
-            type="text"
-            placeholder="Text"
-            value={text}
-            onChange={e => setText(e.target.value)}
-            ref={r => (ref.current = r)}
-          ></input>
-          <button
-            onClick={() => add()}
-            className={
-              "box-border hover:bg-gray-900 hover:text-white rounded p-1 "
-            }
-          >
-            Create
-          </button>
+          <form onSubmit={e => e.preventDefault()}>
+            <input
+              className={"rounded my-2 pl-1 focus:border-blue-400"}
+              type="text"
+              placeholder="Text"
+              value={text}
+              onChange={e => setText(e.target.value)}
+              ref={r => (ref.current = r)}
+            ></input>
+
+            <div className={"flex flex-row"}>
+              <button
+                onClick={() => add()}
+                className={
+                  "box-border w-1/3 hover:bg-gray-900 hover:text-white rounded p-1 "
+                }
+              >
+                Create
+              </button>
+
+              <button
+                onClick={() => setText("")}
+                className={
+                  "box-border w-1/3 hover:bg-gray-900 hover:text-white rounded p-1 ml-2 "
+                }
+              >
+                Clear Text
+              </button>
+              <button
+                onClick={() => dispatch(removeAllCards())}
+                className={
+                  "border border-red-900 w-1/3 hover:bg-red-900 hover:text-white rounded p-1 ml-2"
+                }
+              >
+                Clear All
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

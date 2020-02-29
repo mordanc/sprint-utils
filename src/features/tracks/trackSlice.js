@@ -45,6 +45,9 @@ export const slice = createSlice({
           return state;
       }
     },
+    removeAllCards: state => {
+      return { ...state, goodCards: [], badCards: [], actionCards: [] };
+    },
     incrementId: state => {
       return { ...state, currentId: state.currentId + 1 };
     }
@@ -56,6 +59,11 @@ export const selectBadCards = state => state.tracks.badCards;
 export const selectActionCards = state => state.tracks.actionCards;
 export const selectId = state => state.tracks.currentId;
 
-export const { addCard, removeCard, incrementId } = slice.actions;
+export const {
+  addCard,
+  removeCard,
+  removeAllCards,
+  incrementId
+} = slice.actions;
 
 export default slice.reducer;
