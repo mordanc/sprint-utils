@@ -9,6 +9,8 @@ import {
 } from "../../features/tracks/trackSlice";
 import { cardTypes } from "../constants";
 
+import { client } from "../socket";
+
 export default function CardCreator(props) {
   const { type = "good", setShowModal } = props;
   const [text, setText] = useState("");
@@ -23,19 +25,20 @@ export default function CardCreator(props) {
   });
 
   const add = () => {
+    const card = {
+      card: {
+        id: curId,
+        text,
+        author: "author",
+        type: type
+      }
+    };
+
     setText("");
     setShowModal(false);
     dispatch(incrementId());
-    dispatch(
-      addCard({
-        card: {
-          id: curId,
-          text,
-          author: "author",
-          type: type
-        }
-      })
-    );
+    dispatch(addCard(card));
+    client.sendCard(card);
   };
 
   return (
