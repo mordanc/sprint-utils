@@ -2,8 +2,9 @@ import * as io from "socket.io-client";
 import { addCard } from "../features/tracks/trackSlice";
 
 import store from "../store";
+import { SERVER_LOCATION } from "./constants";
 
-const socket = io.connect(`http://localhost:5000/joinRoom`);
+const socket = io.connect(`${SERVER_LOCATION}/joinRoom`);
 
 const connect = roomName => {
   const dispatch = store.dispatch;

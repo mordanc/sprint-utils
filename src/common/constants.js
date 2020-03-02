@@ -1,5 +1,7 @@
 import styles from "../App.module.css";
 
+export const SERVER_LOCATION = "https://sprint-utils-backend.herokuapp.com/";
+
 export const cardTypes = {
   GOOD: "good",
   BAD: "bad",
