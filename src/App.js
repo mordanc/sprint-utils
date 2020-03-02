@@ -9,7 +9,10 @@ import { client } from "./common/socket";
 
 function App() {
   client.connect("myRoom");
-
+  /**
+   * for dynamic lobby system, firebase.json's rewrite property
+   * might redirect requests to lobbies to the homepage, idk
+   */
   return (
     <div>
       <Navbar />
