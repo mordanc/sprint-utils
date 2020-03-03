@@ -12,8 +12,8 @@ export const slice = createSlice({
   },
   reducers: {
     addCard: (state, action) => {
-      const card = action.payload.card;
-      const type = action.payload.card.type;
+      const card = action.payload;
+      const type = card.type;
 
       switch (type) {
         case cardTypes.GOOD:

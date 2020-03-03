@@ -24,14 +24,12 @@ export default function CardCreator(props) {
     ref.current.focus();
   });
 
-  const add = () => {
+  function add() {
     const card = {
-      card: {
-        id: curId,
-        text,
-        author: "author",
-        type: type
-      }
+      id: curId,
+      text,
+      author: "author",
+      type: type
     };
 
     setText("");
@@ -39,7 +37,7 @@ export default function CardCreator(props) {
     dispatch(incrementId());
     dispatch(addCard(card));
     client.sendCard(card);
-  };
+  }
 
   return (
     <div className="flex flex-col w-3/4 mx-auto my-6 items-center">
