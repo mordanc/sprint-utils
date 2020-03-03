@@ -18,12 +18,14 @@
     "tailwindcss": "^1.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "prebuild": "set NODE_ENV=production npm run  build:styles",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:styles": "postcss src/tailwind.css -o src/styles.css"
+    "build:styles": "postcss src/tailwind.css -o src/styles.css",
+    "prestart": "npm run build:styles",
+    "dev": "react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
