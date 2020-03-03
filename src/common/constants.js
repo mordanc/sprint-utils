@@ -1,7 +1,7 @@
 import styles from "../App.module.css";
 
-export const SERVER_LOCATION = "https://sprint-utils-backend.herokuapp.com";
-// export const SERVER_LOCATION = "http://localhost:7000";
+// export const SERVER_LOCATION = "https://sprint-utils-backend.herokuapp.com";
+export const SERVER_LOCATION = "http://localhost:7000";
 
 export const cardTypes = {
   GOOD: "good",
